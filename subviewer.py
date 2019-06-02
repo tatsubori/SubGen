@@ -42,18 +42,21 @@ def main(argv):
         
         while True:
             line = tomy.readline()
+            
             if not line:
                 printSub(current_header, current_body)
                 break
+            
             result = matcher.match(line)
-        if not result:
-            current_body.append(line.strip())
-        else:
-            printSub(current_header, current_body)
-            #print(result.group(1))
-            current_header = result.group(1)
-            #print(result.group(2).strip())
-            current_body = [ result.group(2).strip() ]
+            if not result:
+                current_body.append(line.strip())
+            else:
+                #print("{} {}".format(current_header, current_body))
+                printSub(current_header, current_body)
+                #print(result.group(1))
+                current_header = result.group(1)
+                #print(result.group(2).strip())
+                current_body = [ result.group(2).strip() ]
 
 
 if __name__ == '__main__':
